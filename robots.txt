@@ -1,0 +1,7 @@
+# Hebergement TEMPORAIRE de demonstration de Flow Industrie.
+# Le site officiel sera sur flowindustrie.com. Cette adresse ne doit pas etre
+# indexee : elle ferait du contenu duplique contre le vrai domaine.
+# GitHub Pages ne sait pas demander de mot de passe : chaque page du paquet
+# porte en plus une balise <meta name="robots" content="noindex,nofollow">.
+User-agent: *
+Disallow: /

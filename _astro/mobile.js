@@ -545,3 +545,45 @@ fabriquePliage({
   if (etroit.addEventListener) etroit.addEventListener('change', reprendre);
   placer();
 })();
+
+
+/* ───────────────────────────────────────────────────────────────────────────
+ * Les photos des cartes de methode
+ *
+ * Porte ici le 17/11/2026, depuis des attributs `onload` et `onerror` ecrits
+ * dans le balisage des quatre pages. Ces attributs sont du script en ligne :
+ * ils obligeraient la CSP a autoriser `unsafe-hashes`, c'est-a-dire a rouvrir
+ * une partie de ce qu'elle sert a fermer. Le comportement est inchange, il est
+ * seulement attache depuis un fichier.
+ *
+ * Ce que fait ce comportement : la classe `avec-photo` ne se pose que si la
+ * photo arrive vraiment, et l'image se retire si elle manque — la carte garde
+ * alors sa mise en page, sans cadre vide ni icone d'image cassee.
+ *
+ * Le cas de l'image DEJA chargee est traite a part, et ce n'est pas un detail :
+ * `mobile.js` est charge en `defer`, donc il tourne apres l'analyse du
+ * document. Une image en cache est alors deja `complete`, son evenement `load`
+ * est passe, et l'attendre ne donnerait jamais rien : la photo resterait sans
+ * sa classe a chaque visite apres la premiere. `naturalWidth` departage une
+ * image arrivee d'une image en echec, les deux etant `complete`.
+ */
+(function () {
+  var photos = document.querySelectorAll('img[data-photo-methode]');
+  for (var i = 0; i < photos.length; i++) {
+    (function (img) {
+      function poser() {
+        var cadre = img.closest('.trajet-image');
+        if (cadre) cadre.classList.add('avec-photo');
+      }
+      function retirer() {
+        if (img.parentNode) img.parentNode.removeChild(img);
+      }
+      if (img.complete) {
+        if (img.naturalWidth > 0) poser(); else retirer();
+        return;
+      }
+      img.addEventListener('load', poser, { once: true });
+      img.addEventListener('error', retirer, { once: true });
+    })(photos[i]);
+  }
+})();

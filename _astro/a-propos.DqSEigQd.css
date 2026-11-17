@@ -252,3 +252,10 @@ input[data-astro-cid-qtd5vjyj][type=text],input[data-astro-cid-qtd5vjyj][type=em
 @media (min-width:1081px){
  html{font-size:clamp(16px,calc(100vw / 120),21.3333px)}
 }
+
+
+/* Le lien des avertissements de formulaire, pose le 17/11/2026 : il heritait
+   d'une couleur de lien prevue pour le fond clair du site, illisible sur le
+   fond d'alerte. Cette feuille est chargee par les 13 pages, et les
+   avertissements aussi. */
+.avertissement a{color:inherit;text-decoration:underline;text-underline-offset:.15em}

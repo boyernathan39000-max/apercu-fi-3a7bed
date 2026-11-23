@@ -33,7 +33,7 @@
   panneau.addEventListener('close', function () { if (declencheur) declencheur.focus(); });
 })();
 
-/* Tracage de la source du lead — sans cookie, sans traceur tiers. */
+/* Tracage de la source du lead, sans cookie, sans traceur tiers. */
 (function () {
   var p = new URLSearchParams(location.search);
   var mettre = function (id, v) { var c = document.getElementById(id); if (c) c.value = v || ''; };

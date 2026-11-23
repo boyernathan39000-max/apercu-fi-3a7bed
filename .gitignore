@@ -1,2 +1,5 @@
 .DS_Store
 .wrangler/
+
+# Compteurs anti-rafale des formulaires : ecrits par le serveur, propres a lui.
+envoi/.donnees/*.txt
